@@ -43,7 +43,7 @@ function Footer() {
         </div>
         </div>
       </div>
-      <p>Copyright © 2023 E-Cart. Build with React.  </p>
+      <p>Copyright © 2023 Bookstore. Build with React.  </p>
     </div>
   )
 }
