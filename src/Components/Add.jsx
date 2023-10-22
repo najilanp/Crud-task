@@ -8,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 
-function Add() {
+function Add({setUploadBookResponse}) {
   const[book,setBook]=useState({
     id:"",caption:"",url:"",link:""
   })
@@ -25,7 +25,9 @@ function Add() {
     }else{
       // make api call
       const response=await uploadBook(book)
-       if(response.status>=200&&response.status<300){
+       if(response.status>=200 && response.status<300){
+        //set server response
+        setUploadBookResponse(response.data)
           
       //modal hide 
       handleClose()

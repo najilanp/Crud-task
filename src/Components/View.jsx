@@ -4,8 +4,10 @@ import { Row,Col } from 'react-bootstrap'
 import { getAllBooks } from '../services/allAPI'
 
 
-function View() {
+
+function View({uploadBookResponse}) {
   const [allBooks,setAllBooks]=useState([])
+  const[deleteBookStatus,setDeleteBookStatus]=useState(false)
 
 const getAllUploadedbooks=async()=>{
 const {data}=await getAllBooks()
@@ -14,7 +16,7 @@ setAllBooks(data);
 
 useEffect(()=>{
   getAllUploadedbooks()
-},[])
+},[uploadBookResponse,deleteBookStatus])
 
 console.log(allBooks);
 
@@ -26,7 +28,7 @@ console.log(allBooks);
       allBooks.length>0?
       allBooks.map(book=>(
         <Col sm={12} md={6} lg={4} xl={3}>
-        <Bookcard displayData={book}/>
+        <Bookcard displayData={book} setDeleteBookStatus={setDeleteBookStatus}/>
       </Col>
       ))
        :"" 

@@ -2,14 +2,23 @@ import React from 'react'
 import { useState } from 'react';
 import { Card,Modal } from 'react-bootstrap'
 import { Link } from 'react-router-dom';
+import { deleteABook } from '../services/allAPI';
 
 
 
-function Bookcard({displayData}) {
+
+function Bookcard({displayData,setDeleteBookStatus}) {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    //delete a vdo
+
+    const removeBook=async(id)=>{
+       const response= await deleteABook(id)
+       setDeleteBookStatus(true)
+    }
   
   return (
     <>
@@ -20,7 +29,7 @@ function Bookcard({displayData}) {
       <Card.Body>
         <Card.Title className='d-flex justify-content-between align-items-center'>
             <h5>{displayData?.caption}</h5>
-            <div className='btn'><i className='fa-solid fa-trash fa-xl  text-danger'></i></div>
+            <button onClick={()=>removeBook(displayData?.id)}  className='btn'><i className='fa-solid fa-trash fa-xl  text-danger'></i></button>
         </Card.Title>
       </Card.Body>
     </Card>
