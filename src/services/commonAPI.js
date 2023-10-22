@@ -6,7 +6,7 @@ let reqConfig={
         "Content-Type":"application/json"
     }
 }
-return axios(reqConfig).then((result)=>{
+return await axios(reqConfig).then((result)=>{
     return result
 }).catch((err)=> {
     return err
