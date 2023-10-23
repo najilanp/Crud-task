@@ -26,6 +26,10 @@ function Add({setUploadBookResponse}) {
       // make api call
       const response=await uploadBook(book)
        if(response.status>=200 && response.status<300){
+        //reset state
+        setBook({
+          id:"",caption:"",url:"",link:""
+        })
         //set server response
         setUploadBookResponse(response.data)
           
@@ -33,7 +37,7 @@ function Add({setUploadBookResponse}) {
       handleClose()
       toast.success(`${response.data.caption} is uploaded successfully`)
        }else{
-        toast.error("please provide unique id")
+        toast.error("please perform action after sometime")
        }
 
     }

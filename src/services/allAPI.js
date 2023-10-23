@@ -33,4 +33,8 @@ export const addCategory=async(body)=>{
    export const getAllCategory=async()=>{
     return await commonAPI("GET",`${BASE_URL}/categories`,"")
    }
-   
+
+//    delete category
+export const deleteCategory=async(id)=>{
+    return await commonAPI("DELETE",`${BASE_URL}/categories/${id}`,{})
+   }

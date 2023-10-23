@@ -15,6 +15,7 @@ setAllBooks(data);
 }
 
 useEffect(()=>{
+  setDeleteBookStatus(false)
   getAllUploadedbooks()
 },[uploadBookResponse,deleteBookStatus])
 
