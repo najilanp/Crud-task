@@ -38,3 +38,8 @@ export const addCategory=async(body)=>{
 export const deleteCategory=async(id)=>{
     return await commonAPI("DELETE",`${BASE_URL}/categories/${id}`,{})
    }
+
+   //update categry
+   export const updateCategory=async(id,updatedCategory)=>{
+    return await commonAPI("PUT",`${BASE_URL}/categories/${id}`,updatedCategory)
+   }

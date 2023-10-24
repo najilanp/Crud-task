@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { Modal,Form,Button } from 'react-bootstrap';
+import { Modal,Form,Button, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { addCategory, deleteCategory, getAllCategory } from '../services/allAPI';
+import { addCategory, deleteCategory, getABook, getAllCategory, updateCategory } from '../services/allAPI';
+import Bookcard from './Bookcard';
 
 
 
@@ -20,7 +21,8 @@ function BookCategory() {
      
       if(categoryName){
         let body={
-          categoryName
+          categoryName,
+          allBooks:[]
         }
         //api call
         const response=await addCategory(body)
@@ -64,10 +66,16 @@ function BookCategory() {
       e.preventDefault()
     }
 
-   const bookDrop=(e,categoryId)=>{
+   const bookDrop=async(e,categoryId)=>{
     console.log(categoryId);
       const bookCardId=e.dataTransfer.getData("cardId")
       console.log(bookCardId);
+      const {data}=await getABook(bookCardId)
+      let selectedCategories=categories.find(item=>item.id===categoryId)
+      selectedCategories.allBooks.push(data)
+     await updateCategory(categoryId,selectedCategories)
+     getCategory()
+
    }
 
 
@@ -85,6 +93,16 @@ function BookCategory() {
                 <h5>{item?.categoryName}</h5>
                 <button onClick={()=>removeCategory(item?.id)} className='btn'><i className='fa-solid fa-trash text-danger'></i></button>
               </div>
+              <Row>
+                {
+                  item?.allBooks&&item?.allBooks.map(card=>(
+                    <Col>
+                    <Bookcard displayData={card}/>
+                    </Col>
+                    )
+                  )
+                }
+              </Row>
             </div>
         )): <p>nothing to display</p>
       }
