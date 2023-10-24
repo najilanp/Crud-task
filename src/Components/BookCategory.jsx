@@ -59,6 +59,17 @@ function BookCategory() {
         getCategory()
     }
 
+    const dragOverCategory=(e)=>{
+      console.log("over");
+      e.preventDefault()
+    }
+
+   const bookDrop=(e,categoryId)=>{
+    console.log(categoryId);
+      const bookCardId=e.dataTransfer.getData("cardId")
+      console.log(bookCardId);
+   }
+
 
   
   return (
@@ -69,7 +80,7 @@ function BookCategory() {
       
       {
         categories?categories.map(item=>(
-            <div className='border p-3 rounded mt-3 mb-3'>
+            <div className='border p-3 rounded mt-3 mb-3' droppable onDragOver={(e)=>dragOverCategory(e)} onDrop={(e)=>bookDrop(e,item?.id)}>
               <div className='d-flex justify-content-between'>
                 <h5>{item?.categoryName}</h5>
                 <button onClick={()=>removeCategory(item?.id)} className='btn'><i className='fa-solid fa-trash text-danger'></i></button>

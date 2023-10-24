@@ -19,12 +19,17 @@ function Bookcard({displayData,setDeleteBookStatus}) {
        const response= await deleteABook(id)
        setDeleteBookStatus(true)
     }
+
+    const dragStarted=(e,id)=>{
+     console.log("started");
+     e.dataTransfer.setData("cardId",id)
+    }
   
   return (
     <>
     {
       displayData&&
-    <Card className='mb-3' >
+    <Card className='mb-3' draggable onDragStart={(e)=>dragStarted(e,displayData?.id)} >
       <Card.Img onClick={handleShow}  style={{width:"100%",height:"180px"}} variant="top" src={displayData?.url}/>
       <Card.Body>
         <Card.Title className='d-flex justify-content-between align-items-center'>
