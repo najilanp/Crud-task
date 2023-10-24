@@ -7,7 +7,7 @@ import { deleteABook } from '../services/allAPI';
 
 
 
-function Bookcard({displayData,setDeleteBookStatus}) {
+function Bookcard({displayData,setDeleteBookStatus,insidecategory}) {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
@@ -34,7 +34,7 @@ function Bookcard({displayData,setDeleteBookStatus}) {
       <Card.Body>
         <Card.Title className='d-flex justify-content-between align-items-center'>
             <h5>{displayData?.caption}</h5>
-            <button onClick={()=>removeBook(displayData?.id)}  className='btn'><i className='fa-solid fa-trash fa-xl  text-danger'></i></button>
+           { insidecategory?"":<button onClick={()=>removeBook(displayData?.id)}  className='btn'><i className='fa-solid fa-trash fa-xl  text-danger'></i></button>}
         </Card.Title>
       </Card.Body>
     </Card>

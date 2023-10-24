@@ -97,7 +97,7 @@ function BookCategory() {
                 {
                   item?.allBooks&&item?.allBooks.map(card=>(
                     <Col>
-                    <Bookcard displayData={card}/>
+                    <Bookcard displayData={card} insidecategory={true}/>
                     </Col>
                     )
                   )
